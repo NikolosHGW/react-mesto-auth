@@ -1,6 +1,15 @@
-# Getting Started with Create React App
+# Mesto with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.  
+In this project i practice with React. (Project under construction)  
+Here you can see my website [mesto-react](https://nikoloshgw.github.io/mesto-react/)  
+
+## What need to do?
+
+* Close popups with key 'Escape'
+* Close popups when we click on outside space
+* Stick footer to the bottom
+* Authorization and authentication
 
 ## Available Scripts
 
@@ -14,11 +23,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -27,44 +31,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Technologies and Tools
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="https://img.shields.io/badge/Code-JavaScript-informational?style=flat&logo=javascript&logoColor=#F7DF1E&color=F7DF1E" /> <img src="https://img.shields.io/badge/Code-HTML5-informational?style=flat&logo=html5&logoColor=#E34F26&color=F7DF1E" /> <img src="https://img.shields.io/badge/Code-CSS3-informational?style=flat&logo=css3&logoColor=#1572B6&color=F7DF1E" /> <img src="https://img.shields.io/badge/Code-React-informational?style=flat&logo=react&logoColor=#61DAFB&color=F7DF1E" /> <img src="https://img.shields.io/badge/Editor-VSCode-informational?style=flat&logo=visualstudiocode&logoColor=#007ACC&color=F7DF1E" /> <img src="https://img.shields.io/badge/Tools-Webpack-informational?style=flat&logo=webpack&logoColor=#8DD6F9&color=F7DF1E" /> <img src="https://img.shields.io/badge/Tools-Babel-informational?style=flat&logo=babel&logoColor=#F9DC3E&color=F7DF1E" /> <img src="https://img.shields.io/badge/Tools-Figma-informational?style=flat&logo=figma&logoColor=#F24E1E&color=F7DF1E" /> <img src="https://img.shields.io/badge/Tools-NPM-informational?style=flat&logo=npm&logoColor=#CB3837&color=F7DF1E" /> <img src="https://img.shields.io/badge/Tools-Git-informational?style=flat&logo=git&logoColor=#F05032&color=F7DF1E" /> <img src="https://img.shields.io/badge/Tools-GitHub-informational?style=flat&logo=github&logoColor=#181717&color=F7DF1E" />
