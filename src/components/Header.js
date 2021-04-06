@@ -22,9 +22,9 @@ export default React.memo(({ email }) => {
         />
       )}
       <div className="header__container">
-        <a className="header__link" target="_blank" href="#">
+        <Link className="header__link" to="/">
           <img className="header__logo" src={logo} alt="логотип Место Россия"/>
-        </a>
+        </Link>
         <Route exact path="/">
           <LogHeader
             openedSelector=""
