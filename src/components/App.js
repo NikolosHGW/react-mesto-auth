@@ -27,6 +27,8 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState({isLoggedIn: false, loggedEmail: ''});
   const history = useHistory();
 
+  let token = localStorage.getItem('token');
+
   React.useEffect(() => {
     api.getInfoUser()
     .then(data => {
@@ -49,7 +51,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
     if(token) {
       checkToken(token)
         .then(data => {
@@ -59,9 +60,17 @@ function App() {
         })
         .catch(res => console.log(res));
     }
-  }, [history, localStorage.getItem('token')]);
+  }, [history, token]);
 
-  function handleCardLike(card) {
+  const closeAllPopups = React.useCallback(() => {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsConfirmDeletePopupOpen(false);
+    setSelectedCard(false);
+  }, []);
+
+  const handleCardLike = React.useCallback(card => {
     const isLiked = card.likes
       .some(user => user._id === currentUser._id);
 
@@ -71,12 +80,14 @@ function App() {
           .map(c => c._id === card._id ? newCard : c));
       })
       .catch(res => console.log(res));
-  }
-  function handleCardDelete(card) {
+  }, [currentUser._id]);
+
+  const handleCardDelete = React.useCallback(card => {
     setIsConfirmDeletePopupOpen(true);
     setSelectedCardForDelete(card);
-  }
-  function handleConfirmCardDelete(card) {
+  }, []);
+
+  const handleConfirmCardDelete = React.useCallback(card => {
     api.deleteCard(card._id)
       .then(() => {
         setCards(prevState => prevState
@@ -84,59 +95,60 @@ function App() {
         closeAllPopups();
       })
       .catch(res => console.log(res));
-  }
-  function handleEditProfileClick() {
+  }, [closeAllPopups]);
+
+  const handleEditProfileClick = React.useCallback(() => {
     setIsEditProfilePopupOpen(true);
-  }
-  function handleAddPlaceClick() {
+  }, []);
+
+  const handleAddPlaceClick = React.useCallback(() => {
     setIsAddPlacePopupOpen(true);
-  }
-  function handleEditAvatarClick() {
+  }, []);
+
+  const handleEditAvatarClick = React.useCallback(() => {
     setIsEditAvatarPopupOpen(true);
-  }
-  function handleCardClick(card) {
+  }, []);
+
+  const handleCardClick = React.useCallback(card => {
     setSelectedCard(card);
-  }
-  function closeAllPopups() {
-    setIsEditProfilePopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setIsConfirmDeletePopupOpen(false);
-    setSelectedCard(false);
-  }
-  function handleUpdateUser({ name, about }) {
+  }, []);
+
+  const handleUpdateUser = React.useCallback(({ name, about }) => {
     api.setInfoUser(name, about)
       .then(res => {
-        setCurrentUser({
-          ...currentUser,
+        setCurrentUser(prev => ({
+          ...prev,
           'name': res.name,
           'about': res.about
-        });
+        }));
         closeAllPopups();
       })
       .catch(res => console.log(res));
-  }
-  function handleUpdateAvatar({ avatar }) {
+  }, [closeAllPopups]);
+
+  const handleUpdateAvatar = React.useCallback(({ avatar }) => {
     api.changeAvatar(avatar)
       .then(res => {
-        setCurrentUser({
-          ...currentUser,
+        setCurrentUser(prev => ({
+          ...prev,
           'avatar': res.avatar,
-        });
+        }));
         closeAllPopups();
       })
       .catch(res => console.log(res));
-  }
-  function handleAddPlaceSubmit({ name, link }) {
+  }, [closeAllPopups]);
+
+  const handleAddPlaceSubmit = React.useCallback(({ name, link }) => {
     api.createCard({name, link})
       .then(res => {
-        setCards([res, ...cards]);
+        setCards(prev => [res, ...prev]);
         closeAllPopups();
       })
       .catch(res => console.log(res))
-  }
+  }, [closeAllPopups]);
 
-  const handleLogin = React.useCallback(() => setLoggedIn(prev => ({...prev, isLoggedIn: true})), []);
+  const handleLogin = React.useCallback(() =>
+    setLoggedIn(prev => ({...prev, isLoggedIn: true})), []);
 
   return (
   <CurrentUserContext.Provider value={currentUser}>
