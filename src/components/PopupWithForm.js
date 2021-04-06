@@ -25,7 +25,7 @@ export default function PopupWithForm({ name, title, textButton, isOpen, onClose
           <button
             className={`popup__save-button${
               isValid ? '' : ' popup__save-button_inactive'}`}
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
             type="submit"
           >
             {isLoading ? (
