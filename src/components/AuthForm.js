@@ -21,7 +21,7 @@ export default function AuthForm({ title, name, textButton, onSubmit, children }
   }
 
   return (
-    <div className="auth">
+    <div className="auth page__auth">
       <h2 className="auth__heading">{title}</h2>
       <form
         className="auth__form"
