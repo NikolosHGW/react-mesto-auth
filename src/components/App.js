@@ -13,7 +13,8 @@ import { Route, Switch, useHistory } from 'react-router';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
-import { checkToken } from '../utils/auth';
+import { authorize, checkToken, register } from '../utils/auth';
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -25,6 +26,11 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState({isLoggedIn: false, loggedEmail: ''});
+  const [infoToolOpen, setInfoToolOpen] = React.useState({
+    isOpen: false,
+    isSuccess: true,
+    text: 'Вы успешно зарегистрировались!'
+  });
   const history = useHistory();
 
   let token = localStorage.getItem('token');
@@ -147,8 +153,52 @@ function App() {
       .catch(res => console.log(res))
   }, [closeAllPopups]);
 
-  const handleLogin = React.useCallback(() =>
-    setLoggedIn(prev => ({...prev, isLoggedIn: true})), []);
+  const handleCloseTool = React.useCallback(() => {
+    setInfoToolOpen(prev => ({...prev, isOpen: false}));
+  }, []);
+
+  const handleRegister = React.useCallback((email, password) => {
+    register(email, password)
+      .then(res => {
+        setInfoToolOpen({
+          isOpen: true,
+          isSuccess: true,
+          text: 'Вы успешно зарегистрировались!',
+        });
+        history.push('/sign-in');
+        console.log(res);
+      })
+      .catch(res => {
+        setInfoToolOpen({
+          isOpen: true,
+          isSuccess: false,
+          text: 'Что-то пошло не так! Попробуйте ещё раз.',
+        });
+        console.log(res);
+      });
+  }, [history]);
+
+  const handleLogin = React.useCallback((email, password) => {
+    authorize(email, password)
+      .then(res => {
+        if(res.token) {
+          localStorage.setItem('token', res.token);
+          setLoggedIn(prev => ({...prev, isLoggedIn: true}));
+          history.push('/');
+        }
+        else {
+          return Promise.reject('Почему-то не нашелся token.');
+        }
+      })
+      .catch(res => {
+        setInfoToolOpen({
+          isOpen: true,
+          isSuccess: false,
+          text: 'Что-то пошло не так! Попробуйте ещё раз.',
+        });
+        console.log(res);
+      });
+  }, [history]);
 
   return (
   <CurrentUserContext.Provider value={currentUser}>
@@ -171,11 +221,18 @@ function App() {
           <Login onLogin={handleLogin} />
         </Route>
         <Route path="/sign-up">
-          <Register />
+          <Register onRegister={handleRegister} />
         </Route>
       </Switch>
       <Footer />
     </div>
+
+    <InfoTooltip
+      isOpen={infoToolOpen.isOpen}
+      onClose={handleCloseTool}
+      isSuccess={infoToolOpen.isSuccess}
+      text={infoToolOpen.text}
+    />
 
     <EditProfilePopup
       isOpen={isEditProfilePopupOpen}
