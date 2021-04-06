@@ -13,7 +13,7 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
       onCardLike={onCardLike}
       onCardDelete={onCardDelete}
     />
-  )), [cards]);
+  )), [cards, onCardClick, onCardLike, onCardDelete]);
 
   return (
   <main className="content">
