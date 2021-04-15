@@ -1,8 +1,8 @@
 # Mesto with React
 
-This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.
-In this project I practice React. I also added authorization and authentication (Project under construction)
-Here you can see my website [react-mesto-auth](https://nikoloshgw.github.io/react-mesto-auth/)
+This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.  
+In this project I practice React. I also added authorization and authentication (Project under construction)  
+Here you can see my website [react-mesto-auth](https://nikoloshgw.github.io/react-mesto-auth/)  
 
 ## What need to do?
 
