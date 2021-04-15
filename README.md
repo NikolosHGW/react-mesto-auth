@@ -1,15 +1,13 @@
 # Mesto with React
 
-This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.  
-In this project i practice with React. (Project under construction)  
-Here you can see my website [mesto-react](https://nikoloshgw.github.io/mesto-react/)  
+This project is reconstruction [mesto](https://github.com/NikolosHGW/mesto), which was build on Vanilla JS.
+In this project I practice React. I also added authorization and authentication (Project under construction)
+Here you can see my website [react-mesto-auth](https://nikoloshgw.github.io/react-mesto-auth/)
 
 ## What need to do?
 
 * Close popups with key 'Escape'
 * Close popups when we click on outside space
-* Stick footer to the bottom
-* Authorization and authentication
 
 ## Available Scripts
 
