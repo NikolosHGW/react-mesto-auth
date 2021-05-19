@@ -87,7 +87,7 @@ export default class Api {
 
   changeLikeCardStatus(id, isLiked) {
     const currentMethod = isLiked ? 'DELETE' : 'PUT';
-    return fetch(`${this.options.baseUrl}/cards/likes/${id}`, {
+    return fetch(`${this.options.baseUrl}/cards/${id}/likes`, {
       method: currentMethod,
       ...this.options.optionsForFetch,
     })
