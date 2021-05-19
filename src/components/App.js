@@ -39,7 +39,6 @@ function App() {
     if(isConnected === 'true') {
       api.getInfoUser()
         .then(data => {
-          console.log(data);
           setCurrentUser({
             name: data.name,
             about: data.about,
@@ -53,19 +52,6 @@ function App() {
     }
   }, [history, isConnected]);
 
-  // React.useEffect(() => {
-  //   api.getInfoUser()
-  //   .then(data => {
-  //     setCurrentUser({
-  //       name: data.name,
-  //       about: data.about,
-  //       avatar: data.avatar,
-  //       _id: data._id
-  //     });
-  //   })
-  //   .catch(res => console.log(res));
-  // }, []);
-
   React.useEffect(() => {
     if (isConnected === 'true') {
       api.getInitialCard()
@@ -75,18 +61,6 @@ function App() {
         .catch(res => console.log(res));
       }
   }, [isConnected]);
-
-  // React.useEffect(() => {
-  //   if(IsConnected) {
-  //     checkToken(IsConnected)
-  //       .then(data => {
-  //         console.log(data);
-  //         setLoggedIn({isLoggedIn: true, loggedEmail: data.data.email});
-  //         history.push('/');
-  //       })
-  //       .catch(res => console.log(res));
-  //   }
-  // }, [history, IsConnected]);
 
   const closeAllPopups = React.useCallback(() => {
     setIsEditProfilePopupOpen(false);
@@ -179,29 +153,26 @@ function App() {
 
   const handleRegister = React.useCallback((email, password) => {
     register(email, password)
-      .then(res => {
+      .then(() => {
         setInfoToolOpen({
           isOpen: true,
           isSuccess: true,
           text: 'Вы успешно зарегистрировались!',
         });
         history.push('/sign-in');
-        console.log(res);
       })
-      .catch(res => {
+      .catch(() => {
         setInfoToolOpen({
           isOpen: true,
           isSuccess: false,
           text: 'Что-то пошло не так! Попробуйте ещё раз.',
         });
-        console.log(res);
       });
   }, [history]);
 
   const handleLogin = React.useCallback((email, password) => {
     authorize(email, password)
       .then(res => {
-        console.log(`Я из handleLogin authorize! Вот res: ${res}`);
         if(res.tokenStatus === 'ok') {
           localStorage.setItem('isConnected', true);
           setLoggedIn(prev => ({...prev, isLoggedIn: true}));
@@ -211,13 +182,12 @@ function App() {
           return Promise.reject('Почему-то не нашелся token.');
         }
       })
-      .catch(res => {
+      .catch(() => {
         setInfoToolOpen({
           isOpen: true,
           isSuccess: false,
           text: 'Что-то пошло не так! Попробуйте ещё раз.',
         });
-        console.log(res);
       });
   }, [history]);
 

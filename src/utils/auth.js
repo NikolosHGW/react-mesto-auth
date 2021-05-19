@@ -29,14 +29,3 @@ export function register(email, password) {
 export function authorize(email, password) {
   return getPromise(email, password, '/signin');
 }
-
-// export function checkToken(token) {
-//   return fetch(`${BASE_URL}/users/me`, {
-//     method: 'GET',
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization" : `Bearer ${token}`
-//     }
-//   })
-//     .then(checkResponse);
-// }
