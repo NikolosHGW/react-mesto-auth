@@ -1,4 +1,6 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+import { options } from './utils.js';
+
+const BASE_URL = 'http://localhost:3001';
 
 function checkResponse(res) {
   console.log(res.status);
@@ -11,9 +13,7 @@ function checkResponse(res) {
 function getPromise(email, password, endPoint) {
   return fetch(`${BASE_URL}${endPoint}`, {
     method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
+    ...options.optionsForFetch,
     body: JSON.stringify({
       password,
       email
@@ -30,13 +30,13 @@ export function authorize(email, password) {
   return getPromise(email, password, '/signin');
 }
 
-export function checkToken(token) {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization" : `Bearer ${token}`
-    }
-  })
-    .then(checkResponse);
-}
+// export function checkToken(token) {
+//   return fetch(`${BASE_URL}/users/me`, {
+//     method: 'GET',
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization" : `Bearer ${token}`
+//     }
+//   })
+//     .then(checkResponse);
+// }

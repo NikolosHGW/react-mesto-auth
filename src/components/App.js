@@ -13,7 +13,7 @@ import { Route, Switch, useHistory } from 'react-router';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
-import { authorize, checkToken, register } from '../utils/auth';
+import { authorize, register } from '../utils/auth';
 import InfoTooltip from "./InfoTooltip";
 
 function App() {
@@ -33,40 +33,60 @@ function App() {
   });
   const history = useHistory();
 
-  let token = localStorage.getItem('token');
+  let isConnected = localStorage.getItem('isConnected');
 
   React.useEffect(() => {
-    api.getInfoUser()
-    .then(data => {
-      setCurrentUser({
-        name: data.name,
-        about: data.about,
-        avatar: data.avatar,
-        _id: data._id
-      });
-    })
-    .catch(res => console.log(res));
-  }, []);
-
-  React.useEffect(() => {
-    api.getInitialCard()
-      .then(data => {
-        setCards(data);
-      })
-      .catch(res => console.log(res));
-  }, []);
-
-  React.useEffect(() => {
-    if(token) {
-      checkToken(token)
+    if(isConnected === 'true') {
+      api.getInfoUser()
         .then(data => {
           console.log(data);
-          setLoggedIn({isLoggedIn: true, loggedEmail: data.data.email});
+          setCurrentUser({
+            name: data.name,
+            about: data.about,
+            avatar: data.avatar,
+            _id: data._id
+          });
+          setLoggedIn({isLoggedIn: true, loggedEmail: data.email});
           history.push('/');
         })
         .catch(res => console.log(res));
     }
-  }, [history, token]);
+  }, [history, isConnected]);
+
+  // React.useEffect(() => {
+  //   api.getInfoUser()
+  //   .then(data => {
+  //     setCurrentUser({
+  //       name: data.name,
+  //       about: data.about,
+  //       avatar: data.avatar,
+  //       _id: data._id
+  //     });
+  //   })
+  //   .catch(res => console.log(res));
+  // }, []);
+
+  React.useEffect(() => {
+    if (isConnected === 'true') {
+      api.getInitialCard()
+        .then(data => {
+          setCards(data);
+        })
+        .catch(res => console.log(res));
+      }
+  }, [isConnected]);
+
+  // React.useEffect(() => {
+  //   if(IsConnected) {
+  //     checkToken(IsConnected)
+  //       .then(data => {
+  //         console.log(data);
+  //         setLoggedIn({isLoggedIn: true, loggedEmail: data.data.email});
+  //         history.push('/');
+  //       })
+  //       .catch(res => console.log(res));
+  //   }
+  // }, [history, IsConnected]);
 
   const closeAllPopups = React.useCallback(() => {
     setIsEditProfilePopupOpen(false);
@@ -181,8 +201,9 @@ function App() {
   const handleLogin = React.useCallback((email, password) => {
     authorize(email, password)
       .then(res => {
-        if(res.token) {
-          localStorage.setItem('token', res.token);
+        console.log(`Я из handleLogin authorize! Вот res: ${res}`);
+        if(res.tokenStatus === 'ok') {
+          localStorage.setItem('isConnected', true);
           setLoggedIn(prev => ({...prev, isLoggedIn: true}));
           history.push('/');
         }

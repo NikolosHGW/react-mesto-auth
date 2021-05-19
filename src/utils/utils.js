@@ -15,10 +15,20 @@ export const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 };
+// export const options = {
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
+//   headers: {
+//     authorization: '767d748b-8638-4c15-8660-c2781c344fe7',
+//     'Content-Type': 'application/json',
+//   }
+// };
+
 export const options = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
-  headers: {
-    authorization: '767d748b-8638-4c15-8660-c2781c344fe7',
-    'Content-Type': 'application/json',
-  }
+  baseUrl: 'http://localhost:3001',
+  optionsForFetch: {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  },
 };

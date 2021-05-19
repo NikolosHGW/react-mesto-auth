@@ -8,7 +8,7 @@ export default React.memo(({ email }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleLoggOut = React.useCallback(() => {
-    localStorage.removeItem('token');
+    localStorage.setItem('isConnected', false);
     setIsOpen(false);
   }, []);
 

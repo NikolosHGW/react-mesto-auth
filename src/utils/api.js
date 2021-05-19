@@ -14,7 +14,7 @@ export default class Api {
 
   getInfoUser() {
     return fetch(`${this.options.baseUrl}/users/me`, {
-      headers: this.options.headers,
+      ...this.options.optionsForFetch,
     })
       .then(this._checkResponse);
   }
@@ -22,7 +22,7 @@ export default class Api {
   setInfoUser(name, job){
     return fetch(`${this.options.baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this.options.headers,
+      ...this.options.optionsForFetch,
       body: JSON.stringify({
         name,
         about: job
@@ -33,7 +33,7 @@ export default class Api {
 
   getInitialCard() {
     return fetch(`${this.options.baseUrl}/cards`, {
-      headers: this.options.headers,
+      ...this.options.optionsForFetch,
     })
       .then(this._checkResponse);
   }
@@ -41,7 +41,7 @@ export default class Api {
   createCard({name, link}) {
     return fetch(`${this.options.baseUrl}/cards`, {
       method: 'POST',
-      headers: this.options.headers,
+      ...this.options.optionsForFetch,
       body: JSON.stringify({
         name,
         link
@@ -53,7 +53,7 @@ export default class Api {
   deleteCard(id) {
     return fetch(`${this.options.baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this.options.headers,
+      ...this.options.optionsForFetch,
     })
       .then(this._checkResponse);
   }
@@ -61,7 +61,7 @@ export default class Api {
   putLike(id) {
     return fetch(`${this.options.baseUrl}/cards/likes/${id}`, {
       method: 'PUT',
-      headers: this.options.headers
+      ...this.options.optionsForFetch,
     })
       .then(this._checkResponse);
   }
@@ -69,7 +69,7 @@ export default class Api {
   deleteLike(id) {
     return fetch(`${this.options.baseUrl}/cards/likes/${id}`, {
       method: 'DELETE',
-      headers: this.options.headers
+      ...this.options.optionsForFetch,
     })
       .then(this._checkResponse);
   }
@@ -77,7 +77,7 @@ export default class Api {
   changeAvatar(avatar) {
     return fetch(`${this.options.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this.options.headers,
+      ...this.options.optionsForFetch,
       body: JSON.stringify({
         avatar
       })
@@ -89,7 +89,7 @@ export default class Api {
     const currentMethod = isLiked ? 'DELETE' : 'PUT';
     return fetch(`${this.options.baseUrl}/cards/likes/${id}`, {
       method: currentMethod,
-      headers: this.options.headers
+      ...this.options.optionsForFetch,
     })
       .then(this._checkResponse);
   }
