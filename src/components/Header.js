@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import logo from '../images/Vector.svg';
 import LogHeader from "./LogHeader";
 
-export default React.memo(({ email }) => {
+export default React.memo(({ email, logout }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleLoggOut = React.useCallback(() => {
+  const handleLogOut = React.useCallback(() => {
     localStorage.setItem('isConnected', false);
+    logout();
     setIsOpen(false);
-  }, []);
+  }, [logout]);
 
   return (
     <header className="header">
@@ -18,7 +19,7 @@ export default React.memo(({ email }) => {
         <LogHeader
           openedSelector=" header__login_opened"
           email={email}
-          onLoggOut={handleLoggOut}
+          onLogOut={handleLogOut}
         />
       )}
       <div className="header__container">
@@ -29,7 +30,7 @@ export default React.memo(({ email }) => {
           <LogHeader
             openedSelector=""
             email={email}
-            onLoggOut={handleLoggOut}
+            onLogOut={handleLogOut}
           />
           {isOpen ? (
             <button

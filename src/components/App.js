@@ -62,6 +62,10 @@ function App() {
       }
   }, [isConnected]);
 
+  const setLogout = React.useCallback(() => setLoggedIn(
+    {isLoggedIn: false, loggedEmail: ''}
+  ), []);
+
   const closeAllPopups = React.useCallback(() => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -194,7 +198,10 @@ function App() {
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header email={loggedIn.loggedEmail} />
+      <Header
+        email={loggedIn.loggedEmail}
+        logout={setLogout}
+      />
       <Switch>
         <ProtectedRoute
           exact path="/"
